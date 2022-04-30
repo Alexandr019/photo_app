@@ -19,30 +19,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        ImagePage.routeName: (context) =>
-        const ImagePage(),
-      },
-        onGenerateRoute: (settings) {
-          // If you push the PassArguments route
-          if (settings.name == PassArgumentsScreen.routeName) {
-            // Cast the arguments to the correct
-            // type: ScreenArguments.
-            final args = settings.arguments as ScreenArguments;
-
-            // Then, extract the required data from
-            // the arguments and pass the data to the
-            // correct screen.
-            return MaterialPageRoute(
-              builder: (context) {
-                return PassArgumentsScreen(
-                  title: args.title,
-                  message: args.message,
-                );
-              },
-            );
-          }
-        },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -104,16 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
-              return const ImagePage();
+              return ImagePage(imagePath);
             }),
           );
         });
   }
-}
-
-class ScreenArguments {
-  final String title;
-  final String message;
-
-  ScreenArguments(this.title, this.message);
 }

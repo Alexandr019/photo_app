@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:photo_app/main.dart';
 
 class ImagePage extends StatelessWidget {
-  const ImagePage({Key? key}) : super(key: key);
+  const ImagePage(this.imagePath,{Key? key}) : super(key: key);
 
-  static const routeName = '/extractArguments';
+  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
 
-    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black, //change your color here
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -26,13 +26,14 @@ class ImagePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
-        ),
+      body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image(
+              image: AssetImage(imagePath),
+              fit: BoxFit.cover,
+            ),
+          ]
       ),
     );
   }
